@@ -20,6 +20,11 @@ class ApiClient:
         path = f"api/v1/pumps/{pump_id}/bolus/deliver"
         return requests.post(url=f"{self._BASE_URL}/{path}")
 
+    @allure.step("Сброс блокировки помпы {pump_id}")
+    def reset_block(self, pump_id: str) -> Response:
+        path = f"api/v1/pumps/{pump_id}/block/reset"
+        return requests.post(url=f"{self._BASE_URL}/{path}")
+
     @allure.step("Отправка единичного значения телеметрии для помпы {pump_id}: {payload}")
     def send_single_telemetry(self, pump_id, payload: SendSingleTelemetryRequest) -> Response:
         path = f"api/v1/pumps/{pump_id}/telemetry"

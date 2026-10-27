@@ -1,5 +1,6 @@
 from api_practice.api_client.models.get_deliver_bolus_response import GetDeliverBolusResponse
 from api_practice.api_client.models.get_status_response import GetStatusResponse
+from api_practice.api_client.models.reset_block_response import ResetBlockResponse
 
 
 def off_pump_get_status_response() -> GetStatusResponse:
@@ -27,4 +28,24 @@ def success_bolus_delivery() -> GetDeliverBolusResponse:
     return GetDeliverBolusResponse(
         status="OK",
         message= "Болюс введен",
+    )
+
+
+def success_block_reset() -> ResetBlockResponse:
+    """
+    Успешный сброс блокировки помпы
+    """
+    return ResetBlockResponse(
+        status="OK",
+        message="Блокировка помпы снята",
+    )
+
+
+def failed_block_reset() -> ResetBlockResponse:
+    """
+    Неудачный сброс блокировки помпы при критически низком уровне глюкозы
+    """
+    return ResetBlockResponse(
+        status="FAILED",
+        message="Блокировка помпы не может быть снята при текущем уровне глюкозы",
     )
